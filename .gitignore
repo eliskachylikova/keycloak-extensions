@@ -9,3 +9,6 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+
+# to not share api key for location service
+email-notifications/src/main/resources/location.properties
