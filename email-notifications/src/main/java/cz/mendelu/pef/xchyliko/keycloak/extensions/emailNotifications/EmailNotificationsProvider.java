@@ -33,24 +33,24 @@ public class EmailNotificationsProvider implements EventListenerProvider {
             var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For");
 
             // first time login from this IP address
-            if (currentIP != null && (user.getAttributes().get("lastLoginIP") == null || !user.getAttributes().get("lastLoginIP").contains(currentIP))) {
+            if (currentIP != null && (user.getAttributes().get("loginIPAddresses") == null || !user.getAttributes().get("loginIPAddresses").contains(currentIP))) {
                 log.warn("This is first time login from this IP: " + currentIP);
                 log.info("Adding IP " + currentIP + " to list.");
                 log.info("Sending notification e-mail.");
                 sendNotificationEmail(session.getContext(), user, currentIP);
 
-                if (user.getAttributes().get("lastLoginIP") == null)
+                if (user.getAttributes().get("loginIPAddresses") == null)
                     // first login ever
-                    user.setSingleAttribute("lastLoginIP", currentIP);
+                    user.setSingleAttribute("loginIPAddresses", currentIP);
                 else {
                     // first login only from current IP
-                    var addresses = user.getAttributes().get("lastLoginIP");
+                    var addresses = user.getAttributes().get("loginIPAddresses");
                     addresses.add(currentIP);
-                    user.setAttribute("lastLoginIP", addresses);
+                    user.setAttribute("loginIPAddresses", addresses);
                 }
             }
 
-            log.info("List of used IPs: " + user.getAttributes().get("lastLoginIP"));
+            log.info("List of used IPs: " + user.getAttributes().get("loginIPAddresses"));
         }
     }
 

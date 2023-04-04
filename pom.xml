@@ -14,16 +14,14 @@
     </modules>
 
     <properties>
-
-        <!-- general settings -->
+        <!-- java version -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <!-- dependency versions -->
+        <!-- dependencies versions -->
         <lombok.version>1.18.22</lombok.version>
-
         <keycloak.version>19.0.3</keycloak.version>
         <auto-service.version>1.0.1</auto-service.version>
         <jackson.version>2.13.2</jackson.version>
