@@ -7,64 +7,6 @@
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/adhoc-keycloak-extensions/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-backup-codes/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-check-authz-policy-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-custom-registration-create-user/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-dynamic-idp-redirector-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-faceauth-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-forgot-username-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-identity-first-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-login-notify-email-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-message-of-the-day/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-require-access-policy-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-require-group-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-require-role-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-session-propagation-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-trust-device/pom.xml" />
-        <option value="$PROJECT_DIR$/custom-ldap-user-storage-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/custom-ldapattribute-import-mapper/pom.xml" />
-        <option value="$PROJECT_DIR$/custom-login-forms-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/custom-required-action/pom.xml" />
-        <option value="$PROJECT_DIR$/custom-saml-identity-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/custom-user-profile-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/dynamic-email-code-auth-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/external-client-storage-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/filebased-sync-userstorage-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/flyweight-user-storage-provider-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/github-enterprise-identity-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/jaxrs-request-filter-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/json-theme-provider-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/kafka-event-listener/pom.xml" />
-        <option value="$PROJECT_DIR$/keycloak-admin-client-example/pom.xml" />
-        <option value="$PROJECT_DIR$/keycloak-playground-server/pom.xml" />
-        <option value="$PROJECT_DIR$/personalinfo-auth-form-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/provisioning-event-listener-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/remote-keycloak-federation/pom.xml" />
-        <option value="$PROJECT_DIR$/reset-password-after-login-eventlistener-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/saml-group-idp-mapper/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-auth-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-auth-form-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-custom-saml-protocol/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-formaction-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-javascript-extensions/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-oidc-mapper/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-realm-resource-with-form-example/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-realm-rest-resource/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-registration-form-action-example/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-saml-mapper/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-session-access-resource/pom.xml" />
-        <option value="$PROJECT_DIR$/simple-theme/pom.xml" />
-        <option value="$PROJECT_DIR$/smallrye-health-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/smallrye-metrics-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/tenant-selection-form-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/thirdparty-mfa-auth-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/token-validation-ui-extension/pom.xml" />
-        <option value="$PROJECT_DIR$/virtual-client-storage-provider-extension/pom.xml" />
-      </set>
-    </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="temurin-17" project-jdk-type="JavaSDK" />
 </project>

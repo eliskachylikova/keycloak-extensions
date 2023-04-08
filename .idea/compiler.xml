@@ -7,64 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="email-notifications" />
+        <module name="login-session-listener" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="adhoc-keycloak-extensions" target="11" />
-      <module name="auth-backup-codes" target="11" />
-      <module name="auth-check-authz-policy-extension" target="11" />
-      <module name="auth-custom-registration-create-user" target="11" />
-      <module name="auth-dynamic-idp-redirector-extension" target="11" />
-      <module name="auth-faceauth-extension" target="11" />
-      <module name="auth-forgot-username-extension" target="11" />
-      <module name="auth-identity-first-extension" target="11" />
-      <module name="auth-login-notify-email-extension" target="11" />
-      <module name="auth-message-of-the-day" target="11" />
-      <module name="auth-require-access-policy-extension" target="11" />
-      <module name="auth-require-group-extension" target="11" />
-      <module name="auth-require-role-extension" target="11" />
-      <module name="auth-session-propagation-extension" target="11" />
-      <module name="auth-trust-device" target="11" />
-      <module name="custom-ldap-user-storage-provider" target="11" />
-      <module name="custom-ldapattribute-import-mapper" target="11" />
-      <module name="custom-login-forms-provider" target="11" />
-      <module name="custom-required-action" target="11" />
-      <module name="custom-saml-identity-provider" target="11" />
-      <module name="custom-user-profile-extension" target="11" />
-      <module name="dynamic-email-code-auth-extension" target="11" />
-      <module name="external-client-storage-extension" target="11" />
-      <module name="filebased-sync-userstorage-provider" target="11" />
-      <module name="flyweight-user-storage-provider-extension" target="11" />
-      <module name="github-enterprise-identity-provider" target="11" />
-      <module name="jaxrs-request-filter-extension" target="11" />
-      <module name="json-theme-provider-extension" target="11" />
-      <module name="kafka-event-listener" target="11" />
-      <module name="keycloak-admin-client-example" target="11" />
-      <module name="keycloak-extension-playground" target="11" />
-      <module name="keycloak-playground-server" target="11" />
-      <module name="personalinfo-auth-form-extension" target="11" />
-      <module name="provisioning-event-listener-extension" target="11" />
-      <module name="remote-keycloak-federation" target="11" />
-      <module name="reset-password-after-login-eventlistener-extension" target="11" />
-      <module name="saml-group-idp-mapper" target="11" />
-      <module name="simple-auth-extension" target="11" />
-      <module name="simple-auth-form-extension" target="11" />
-      <module name="simple-custom-saml-protocol" target="11" />
-      <module name="simple-formaction-extension" target="11" />
-      <module name="simple-javascript-extensions" target="11" />
-      <module name="simple-oidc-mapper" target="11" />
-      <module name="simple-realm-resource-with-form-example" target="11" />
-      <module name="simple-realm-rest-resource" target="11" />
-      <module name="simple-registration-form-action-example" target="11" />
-      <module name="simple-saml-mapper" target="11" />
-      <module name="simple-session-access-resource" target="11" />
-      <module name="simple-theme" target="11" />
-      <module name="smallrye-health-extension" target="11" />
-      <module name="smallrye-metrics-extension" target="11" />
-      <module name="tenant-selection-form-extension" target="11" />
-      <module name="thirdparty-mfa-auth-extension" target="11" />
-      <module name="token-validation-ui-extension" target="11" />
-      <module name="virtual-client-storage-provider-extension" target="11" />
+      <module name="session-info-theme" target="11" />
+      <module name="session-listener" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
