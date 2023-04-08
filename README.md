@@ -1,9 +1,9 @@
 # keycloak-extensions
 **Table of contents**
 
-- Email Notifications Keycloak Extension
-- Login Session Listener Keycloak Extension
-- Custom theme for Keycloak Account Console
+- [Email Notifications Keycloak Extension](https://github.com/eliskachylikova/keycloak-extensions/tree/main/email-notifications)
+- [Login Session Listener Keycloak Extension](https://github.com/eliskachylikova/keycloak-extensions/tree/main/login-session-listener)
+- [Custom theme for Keycloak Account Console](https://github.com/eliskachylikova/keycloak-extensions/tree/main/custom-theme)
 
 **Requirements**
 
