@@ -56,11 +56,13 @@ public class EmailNotificationsProvider implements EventListenerProvider {
 
     private void sendNotificationEmail(KeycloakContext context, UserModel userModel, String currentIP) {
 
+        // get smtpConfig that is needed to send the e-mail properly
         Map<String, String> smtpConfig = context.getRealm().getSmtpConfig();
         if (smtpConfig == null || smtpConfig.isEmpty()) {
             return;
         }
 
+        // get location
         String location;
         try {
             location = LocationService.getLocationOfIp(currentIP);
@@ -69,15 +71,28 @@ public class EmailNotificationsProvider implements EventListenerProvider {
             location = "unknown location";
         }
 
+        // get user agent e.g. Firefox
         var userAgent = context.getRequestHeaders().getHeaderString("User-Agent");
 
-        EmailSenderProvider emailSenderProvider = session.getProvider(EmailSenderProvider.class);
-
+        // determine which language use in e-mail if there are more to choose
         Locale locale = session.getContext().resolveLocale(userModel);
         ResourceBundle resourceBundle = ResourceBundle.getBundle("email_content", locale);
 
-        String htmlBody = resourceBundle.getString("htmlBody").replace("${username}", userModel.getUsername()).replace("${currentIP}", currentIP).replace("${location}", location).replace("${userAgent}", userAgent);
-        String textBody = resourceBundle.getString("textBody").replace("${username}", userModel.getUsername()).replace("${currentIP}", currentIP).replace("${location}", location).replace("${userAgent}", userAgent);
+        // complete e-mail content
+        String htmlBody = resourceBundle.getString("htmlBody")
+                .replace("${username}", userModel.getUsername())
+                .replace("${currentIP}", currentIP)
+                .replace("${location}", location)
+                .replace("${userAgent}", userAgent);
+
+        String textBody = resourceBundle.getString("textBody")
+                .replace("${username}", userModel.getUsername())
+                .replace("${currentIP}", currentIP)
+                .replace("${location}", location)
+                .replace("${userAgent}", userAgent);
+
+        // try to send e-mail
+        EmailSenderProvider emailSenderProvider = session.getProvider(EmailSenderProvider.class);
 
         try {
             if (userModel.getEmail() != null)
