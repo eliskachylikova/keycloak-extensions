@@ -69,13 +69,15 @@ public class EmailNotificationsProvider implements EventListenerProvider {
             location = "unknown location";
         }
 
+        var userAgent = context.getRequestHeaders().getHeaderString("User-Agent");
+
         EmailSenderProvider emailSenderProvider = session.getProvider(EmailSenderProvider.class);
 
         Locale locale = session.getContext().resolveLocale(userModel);
         ResourceBundle resourceBundle = ResourceBundle.getBundle("email_content", locale);
 
-        String htmlBody = resourceBundle.getString("htmlBody").replace("${username}", userModel.getUsername()).replace("${currentIP}", currentIP).replace("${location}", location);
-        String textBody = resourceBundle.getString("textBody").replace("${username}", userModel.getUsername()).replace("${currentIP}", currentIP).replace("${location}", location);
+        String htmlBody = resourceBundle.getString("htmlBody").replace("${username}", userModel.getUsername()).replace("${currentIP}", currentIP).replace("${location}", location).replace("${userAgent}", userAgent);
+        String textBody = resourceBundle.getString("textBody").replace("${username}", userModel.getUsername()).replace("${currentIP}", currentIP).replace("${location}", location).replace("${userAgent}", userAgent);
 
         try {
             if (userModel.getEmail() != null)
