@@ -21,6 +21,8 @@ public class LoginSessionListenerProvider implements EventListenerProvider {
         this.session = session;
     }
 
+    private final int MAX_SESSIONS = 20;
+
     @Override
     public void onEvent(Event event) {
 
@@ -28,7 +30,8 @@ public class LoginSessionListenerProvider implements EventListenerProvider {
             return;
 
         UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
-        var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For");
+        // todo pouze pro debug ucely, zmenit pred nasazenim
+        var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For") != null ? session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For") : session.getContext().getConnection().getRemoteAddr();
 
         if (currentIP == null)
             return;
@@ -43,20 +46,26 @@ public class LoginSessionListenerProvider implements EventListenerProvider {
         if (user.getAttributes().get("sessionInfo") == null) {
             user.setSingleAttribute("sessionInfo", sessionInfo);
         } else {
-            var infoList = user.getAttributes().get("sessionInfo");
-            infoList.add(sessionInfo);
-            user.setAttribute("sessionInfo", infoList);
+            var savedSessions = user.getAttributes().get("sessionInfo");
+            savedSessions.add(sessionInfo);
+            user.setAttribute("sessionInfo", savedSessions);
         }
 
+        deleteOldSessions(user);
+    }
+
+    private void deleteOldSessions(UserModel user) {
+        var savedSessions = user.getAttributes().get("sessionInfo");
+        if (savedSessions.size() > MAX_SESSIONS) {
+            var howManyRemove = savedSessions.size() - MAX_SESSIONS;
+            savedSessions.subList(0, howManyRemove).clear();
+            user.setAttribute("sessionInfo", savedSessions);
+        }
     }
 
     @Override
-    public void onEvent(AdminEvent adminEvent, boolean b) {
-
-    }
+    public void onEvent(AdminEvent adminEvent, boolean b) {}
 
     @Override
-    public void close() {
-
-    }
+    public void close() {}
 }
