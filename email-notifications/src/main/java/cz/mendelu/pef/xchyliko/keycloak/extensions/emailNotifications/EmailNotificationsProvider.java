@@ -32,10 +32,12 @@ public class EmailNotificationsProvider implements EventListenerProvider {
             return;
 
         UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
+        // todo pouze pro debug ucely, zmenit pred nasazenim
         var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For") != null ? session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For") : session.getContext().getConnection().getRemoteAddr();
+        var savedAddresses = user.getAttributes().get("loginIPAddresses");
 
         // first time login from this IP address
-        if (currentIP != null && (user.getAttributes().get("loginIPAddresses") == null || !user.getAttributes().get("loginIPAddresses").contains(currentIP))) {
+        if (currentIP != null && (savedAddresses == null || !savedAddresses.contains(currentIP))) {
             log.warn("This is first time login from this IP: " + currentIP);
             log.info("Adding IP " + currentIP + " to list.");
             log.info("Sending notification e-mail.");

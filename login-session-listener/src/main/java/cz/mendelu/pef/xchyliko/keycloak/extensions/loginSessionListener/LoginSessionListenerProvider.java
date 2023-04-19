@@ -33,10 +33,12 @@ public class LoginSessionListenerProvider implements EventListenerProvider {
         if (currentIP == null)
             return;
 
+        var userAgent = session.getContext().getRequestHeaders().getHeaderString("User-Agent");
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String time = formatter.format(LocalTime.now());
 
-        String sessionInfo = "IP address: " + currentIP + ", Date: " + LocalDate.now() + ", Time: " + time;
+        String sessionInfo = "IP address: " + currentIP + ", Date: " + LocalDate.now() + ", Time: " + time + ", Agent: " + userAgent;
 
         if (user.getAttributes().get("sessionInfo") == null) {
             user.setSingleAttribute("sessionInfo", sessionInfo);
