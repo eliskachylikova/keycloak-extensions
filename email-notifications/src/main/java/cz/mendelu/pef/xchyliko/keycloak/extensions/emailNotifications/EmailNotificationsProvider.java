@@ -28,30 +28,31 @@ public class EmailNotificationsProvider implements EventListenerProvider {
     @Override
     public void onEvent(Event event) {
 
-        if (event.getType().equals(EventType.LOGIN)) {
-            UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
-            var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For");
+        if (!event.getType().equals(EventType.LOGIN))
+            return;
 
-            // first time login from this IP address
-            if (currentIP != null && (user.getAttributes().get("loginIPAddresses") == null || !user.getAttributes().get("loginIPAddresses").contains(currentIP))) {
-                log.warn("This is first time login from this IP: " + currentIP);
-                log.info("Adding IP " + currentIP + " to list.");
-                log.info("Sending notification e-mail.");
-                sendNotificationEmail(session.getContext(), user, currentIP);
+        UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
+        var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For") != null ? session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For") : session.getContext().getConnection().getRemoteAddr();
 
-                if (user.getAttributes().get("loginIPAddresses") == null)
-                    // first login ever
-                    user.setSingleAttribute("loginIPAddresses", currentIP);
-                else {
-                    // first login only from current IP
-                    var addresses = user.getAttributes().get("loginIPAddresses");
-                    addresses.add(currentIP);
-                    user.setAttribute("loginIPAddresses", addresses);
-                }
+        // first time login from this IP address
+        if (currentIP != null && (user.getAttributes().get("loginIPAddresses") == null || !user.getAttributes().get("loginIPAddresses").contains(currentIP))) {
+            log.warn("This is first time login from this IP: " + currentIP);
+            log.info("Adding IP " + currentIP + " to list.");
+            log.info("Sending notification e-mail.");
+            sendNotificationEmail(session.getContext(), user, currentIP);
+
+            if (user.getAttributes().get("loginIPAddresses") == null)
+                // first login ever
+                user.setSingleAttribute("loginIPAddresses", currentIP);
+            else {
+                // first login only from current IP
+                var addresses = user.getAttributes().get("loginIPAddresses");
+                addresses.add(currentIP);
+                user.setAttribute("loginIPAddresses", addresses);
             }
-
-            log.info("List of used IPs: " + user.getAttributes().get("loginIPAddresses"));
         }
+
+        log.info("List of used IPs: " + user.getAttributes().get("loginIPAddresses"));
     }
 
     private void sendNotificationEmail(KeycloakContext context, UserModel userModel, String currentIP) {

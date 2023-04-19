@@ -24,27 +24,28 @@ public class LoginSessionListenerProvider implements EventListenerProvider {
     @Override
     public void onEvent(Event event) {
 
-        if (event.getType().equals(EventType.LOGIN)) {
+        if (!event.getType().equals(EventType.LOGIN))
+            return;
 
-            UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
-            var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For");
+        UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
+        var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For");
 
-            if (currentIP == null)
-                return;
+        if (currentIP == null)
+            return;
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            String time = formatter.format(LocalTime.now());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        String time = formatter.format(LocalTime.now());
 
-            String sessionInfo = "IP address: " + currentIP + ", Date: " + LocalDate.now() + ", Time: " + time;
+        String sessionInfo = "IP address: " + currentIP + ", Date: " + LocalDate.now() + ", Time: " + time;
 
-            if (user.getAttributes().get("sessionInfo") == null) {
-                user.setSingleAttribute("sessionInfo", sessionInfo);
-            } else {
-                var infoList = user.getAttributes().get("sessionInfo");
-                infoList.add(sessionInfo);
-                user.setAttribute("sessionInfo", infoList);
-            }
+        if (user.getAttributes().get("sessionInfo") == null) {
+            user.setSingleAttribute("sessionInfo", sessionInfo);
+        } else {
+            var infoList = user.getAttributes().get("sessionInfo");
+            infoList.add(sessionInfo);
+            user.setAttribute("sessionInfo", infoList);
         }
+
     }
 
     @Override
