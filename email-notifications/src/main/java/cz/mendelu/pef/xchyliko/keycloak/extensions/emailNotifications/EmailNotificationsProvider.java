@@ -70,7 +70,7 @@ public class EmailNotificationsProvider implements EventListenerProvider {
         try {
             location = LocationService.getLocationOfIp(currentIP);
         } catch (IOException e) {
-            log.error("Unable to get location: " + e.getMessage());
+            log.error("Unable to get location of IP address: " + e.getMessage());
             location = "unknown location";
         }
 

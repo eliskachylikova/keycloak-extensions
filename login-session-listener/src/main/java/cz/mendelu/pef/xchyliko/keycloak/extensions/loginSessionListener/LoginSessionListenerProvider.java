@@ -8,6 +8,7 @@ import org.keycloak.events.admin.AdminEvent;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.UserModel;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -38,10 +39,18 @@ public class LoginSessionListenerProvider implements EventListenerProvider {
 
         var userAgent = session.getContext().getRequestHeaders().getHeaderString("User-Agent");
 
+        String location;
+        try {
+            location = LocationService.getLocationOfIp(currentIP);
+        } catch (IOException e) {
+            log.error("Unable to get location of IP address: " + e.getMessage());
+            location = "unknown location";
+        }
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String time = formatter.format(LocalTime.now());
 
-        String sessionInfo = "IP address: " + currentIP + ", Date: " + LocalDate.now() + ", Time: " + time + ", Agent: " + userAgent;
+        String sessionInfo = "IP address: " + currentIP + ", Date: " + LocalDate.now() + ", Time: " + time + ", Agent: " + userAgent + ", Location: " + location;
 
         if (user.getAttributes().get("sessionInfo") == null) {
             user.setSingleAttribute("sessionInfo", sessionInfo);
