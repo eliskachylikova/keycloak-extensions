@@ -12,6 +12,7 @@ import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.UserModel;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -68,7 +69,7 @@ public class EmailNotificationsProvider implements EventListenerProvider {
         // get location
         String location;
         try {
-            location = LocationService.getLocationOfIp(currentIP);
+            location = LocationService.getLocationOfIp(new URL(LocationService.COUNTRY_URL + currentIP));
         } catch (IOException e) {
             log.error("Unable to get location of IP address: " + e.getMessage());
             location = "unknown location";

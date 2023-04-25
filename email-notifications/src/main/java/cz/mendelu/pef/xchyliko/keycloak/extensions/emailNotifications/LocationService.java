@@ -14,7 +14,7 @@ import java.util.Properties;
 @JBossLog
 public class LocationService {
 
-    private static String COUNTRY_URL;
+    public static String COUNTRY_URL;
     private static String ACCOUNT_ID;
     private static String LICENSE_KEY;
 
@@ -30,14 +30,14 @@ public class LocationService {
         }
     }
 
-    public static String getLocationOfIp(String ipAddress) throws IOException {
+    public static String getLocationOfIp(URL url) throws IOException {
 
         // Set the Authorization header with account ID and license key
         String auth = ACCOUNT_ID + ":" + LICENSE_KEY;
         byte[] encodedAuth = Base64.encodeBytesToBytes(auth.getBytes());
         String authHeader = "Basic " + new String(encodedAuth);
 
-        URL url = new URL(COUNTRY_URL + ipAddress);
+//        URL url = new URL(COUNTRY_URL + ipAddress);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Authorization", authHeader);
