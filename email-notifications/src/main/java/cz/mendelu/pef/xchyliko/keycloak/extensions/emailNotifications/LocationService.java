@@ -15,8 +15,8 @@ import java.util.Properties;
 public class LocationService {
 
     public static String COUNTRY_URL;
-    private static String ACCOUNT_ID;
-    private static String LICENSE_KEY;
+    public static String ACCOUNT_ID;
+    public static String LICENSE_KEY;
 
     static {
         Properties prop = new Properties();
@@ -32,7 +32,7 @@ public class LocationService {
 
     public static String getLocationOfIp(URL url) throws IOException {
 
-        // Set the Authorization header with account ID and license key
+        // set authorization header with account ID and license key for MaxMind Geo API
         String auth = ACCOUNT_ID + ":" + LICENSE_KEY;
         byte[] encodedAuth = Base64.encodeBytesToBytes(auth.getBytes());
         String authHeader = "Basic " + new String(encodedAuth);
@@ -42,11 +42,10 @@ public class LocationService {
         con.setRequestMethod("GET");
         con.setRequestProperty("Authorization", authHeader);
 
-        // Get the response code
         int responseCode = con.getResponseCode();
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
-            // Read the response
+            // successful response
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();
@@ -56,14 +55,14 @@ public class LocationService {
             }
             in.close();
 
-            // Parse the response JSON using Jackson
+            // parse response JSON
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(response.toString());
 
-            // Return in format 'Country, Continent'
+            // return in format 'Country, Continent'
             return root.get("country").get("names").get("en").asText() + ", " + root.get("continent").get("names").get("en").asText();
         } else {
-            // Handle the error response
+            // error response
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();
