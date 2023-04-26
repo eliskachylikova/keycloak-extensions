@@ -1,4 +1,4 @@
-import cz.mendelu.pef.xchyliko.keycloak.extensions.emailNotifications.LocationService;
+import cz.mendelu.pef.xchyliko.keycloak.extensions.loginSessionListener.LocationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.keycloak.common.util.Base64;
@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;

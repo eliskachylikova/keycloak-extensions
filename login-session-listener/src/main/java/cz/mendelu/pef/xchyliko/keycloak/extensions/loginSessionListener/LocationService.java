@@ -17,9 +17,9 @@ import java.util.Properties;
 @JBossLog
 public class LocationService {
 
-    private static String COUNTRY_URL;
-    private static String ACCOUNT_ID;
-    private static String LICENSE_KEY;
+    public static String COUNTRY_URL;
+    public static String ACCOUNT_ID;
+    public static String LICENSE_KEY;
 
     static {
         Properties prop = new Properties();
@@ -33,14 +33,13 @@ public class LocationService {
         }
     }
 
-    public static String getLocationOfIp(String ipAddress) throws IOException {
+    public static String getLocationOfIp(URL url) throws IOException {
 
         // set authorization header with account ID and license key for MaxMind Geo API
         String auth = ACCOUNT_ID + ":" + LICENSE_KEY;
         byte[] encodedAuth = Base64.encodeBytesToBytes(auth.getBytes());
         String authHeader = "Basic " + new String(encodedAuth);
 
-        URL url = new URL(COUNTRY_URL + ipAddress);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Authorization", authHeader);
