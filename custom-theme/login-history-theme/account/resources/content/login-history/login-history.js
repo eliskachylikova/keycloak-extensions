@@ -1,15 +1,6 @@
 import * as React from "../../../../common/keycloak/web_modules/react.js";
 import { AccountServiceContext } from "../../account-service/AccountServiceContext.js";
-import {
-    Card,
-    CardBody,
-    EmptyState,
-    EmptyStateBody,
-    EmptyStateVariant,
-    Grid,
-    GridItem,
-    Title
-} from '../../../../common/keycloak/web_modules/@patternfly/react-core.js';
+import { Title } from '../../../../common/keycloak/web_modules/@patternfly/react-core.js';
 
 export class LoginHistory extends React.Component {
     static contextType = AccountServiceContext;
@@ -56,4 +47,4 @@ export class LoginHistory extends React.Component {
             e('div', {class: 'pf-c-card__body'}, sessionInfoItems)
         ]);
     }
-};
+}
