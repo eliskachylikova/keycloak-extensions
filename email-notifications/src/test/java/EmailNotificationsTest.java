@@ -1,4 +1,5 @@
 import cz.mendelu.pef.xchyliko.keycloak.extensions.emailNotifications.EmailNotificationsProvider;
+import cz.mendelu.pef.xchyliko.keycloak.extensions.emailNotifications.LocationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.keycloak.email.EmailException;
@@ -6,10 +7,15 @@ import org.keycloak.email.EmailSenderProvider;
 import org.keycloak.events.Event;
 import org.keycloak.events.EventType;
 import org.keycloak.models.*;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.HttpHeaders;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
 import static org.mockito.Mockito.*;
@@ -18,7 +24,7 @@ import static org.mockito.Mockito.*;
 public class EmailNotificationsTest {
 
     @Test
-    void onEvent_success() throws EmailException {
+    void onEvent_success() throws EmailException, IOException {
         // mock classes
         Event mockEvent = mock(Event.class);
         KeycloakSession mockSession = mock(KeycloakSession.class);
@@ -49,6 +55,11 @@ public class EmailNotificationsTest {
         when(mockRealm.getSmtpConfig()).thenReturn(smtpConfig);
         when(mockContext.resolveLocale(mockUser)).thenReturn(new Locale("EN_US"));
         when(mockUser.getUsername()).thenReturn("username");
+
+        MockedStatic<LocationService> locationSevice = Mockito.mockStatic(LocationService.class);
+        locationSevice.when(() -> LocationService.getLocationOfIp(new URL(LocationService.COUNTRY_URL + "1.2.3.4")))
+                .thenReturn("Australia, Oceania");
+
         when(mockHeaders.getHeaderString("User-Agent")).thenReturn("Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/112.0");
         when(mockUser.getEmail()).thenReturn("example@example.com");
         when(mockSession.getProvider(EmailSenderProvider.class)).thenReturn(mockEmailProvider);

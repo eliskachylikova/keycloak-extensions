@@ -71,8 +71,5 @@ public class LocationServiceTest {
         verify(mockedCon, times(1)).setRequestMethod("GET");
         verify(mockedCon, times(1)).getResponseCode();
     }
-
-    // todo network error
-
 }
 

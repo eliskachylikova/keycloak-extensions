@@ -1,12 +1,16 @@
+import cz.mendelu.pef.xchyliko.keycloak.extensions.loginSessionListener.LocationService;
 import cz.mendelu.pef.xchyliko.keycloak.extensions.loginSessionListener.LoginSessionListenerProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.keycloak.events.Event;
 import org.keycloak.events.EventType;
 import org.keycloak.models.*;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.HttpHeaders;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -41,6 +45,10 @@ public class LoginSessionTest {
         when(mockContext.getRequestHeaders()).thenReturn(mockHeaders);
         when(mockHeaders.getHeaderString("X-Forwarded-For")).thenReturn("1.2.3.4");
         when(mockHeaders.getHeaderString("User-Agent")).thenReturn("Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/112.0");
+
+        MockedStatic<LocationService> locationSevice = Mockito.mockStatic(LocationService.class);
+        locationSevice.when(() -> LocationService.getLocationOfIp(new URL(LocationService.COUNTRY_URL + "1.2.3.4")))
+                .thenReturn("Australia, Oceania");
 
         // create and mock sample user attributes
         Map<String, List<String>> attributes = new HashMap<>();

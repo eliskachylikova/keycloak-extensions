@@ -37,7 +37,6 @@ public class LocationService {
         byte[] encodedAuth = Base64.encodeBytesToBytes(auth.getBytes());
         String authHeader = "Basic " + new String(encodedAuth);
 
-//        URL url = new URL(COUNTRY_URL + ipAddress);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Authorization", authHeader);
