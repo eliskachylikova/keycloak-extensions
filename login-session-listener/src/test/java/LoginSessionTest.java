@@ -13,6 +13,7 @@ import javax.ws.rs.core.HttpHeaders;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,7 +65,7 @@ public class LoginSessionTest {
         // create updated attributes
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String time = formatter.format(LocalTime.now());
-        var updatedSessionInfo = List.of("example", "IP address: 1.2.3.4, Date: " + LocalDate.now() + ", Time: " + time + ", Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/112.0, Location: Australia, Oceania");
+        var updatedSessionInfo = List.of("example", "IP address: 1.2.3.4, Date: " + LocalDate.now() + ", Time: " + time + " " + ZoneId.systemDefault() + ", Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/112.0, Location: Australia, Oceania");
 
         // verify if the parameter has been set and with correct data
         verify(mockUser, times(1)).setAttribute("sessionInfo", updatedSessionInfo);

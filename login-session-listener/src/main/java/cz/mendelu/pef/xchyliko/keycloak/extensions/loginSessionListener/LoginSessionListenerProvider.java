@@ -11,7 +11,9 @@ import org.keycloak.models.UserModel;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 @JBossLog
@@ -51,7 +53,7 @@ public class LoginSessionListenerProvider implements EventListenerProvider {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String time = formatter.format(LocalTime.now());
 
-        String sessionInfo = "IP address: " + currentIP + ", Date: " + LocalDate.now() + ", Time: " + time + ", Agent: " + userAgent + ", Location: " + location;
+        String sessionInfo = "IP address: " + currentIP + ", Date: " + LocalDate.now() + ", Time: " + time + " " + ZoneId.systemDefault() + ", Agent: " + userAgent + ", Location: " + location;
 
         if (user.getAttributes().get("sessionInfo") == null) {
             user.setSingleAttribute("sessionInfo", sessionInfo);
