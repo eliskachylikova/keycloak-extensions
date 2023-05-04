@@ -14,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.ws.rs.core.HttpHeaders;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -24,7 +23,7 @@ import static org.mockito.Mockito.*;
 public class EmailNotificationsTest {
 
     @Test
-    void onEvent_success() throws EmailException, IOException {
+    void onEvent_success() throws EmailException {
         // mock classes
         Event mockEvent = mock(Event.class);
         KeycloakSession mockSession = mock(KeycloakSession.class);

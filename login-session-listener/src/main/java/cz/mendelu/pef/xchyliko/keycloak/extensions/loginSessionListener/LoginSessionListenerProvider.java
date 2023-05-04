@@ -34,8 +34,7 @@ public class LoginSessionListenerProvider implements EventListenerProvider {
             return;
 
         UserModel user = session.users().getUserById(session.getContext().getRealm(), event.getUserId());
-        // todo pouze pro debug ucely, zmenit pred nasazenim
-        var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For") != null ? session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For") : session.getContext().getConnection().getRemoteAddr();
+        var currentIP = session.getContext().getRequestHeaders().getHeaderString("X-Forwarded-For");
 
         if (currentIP == null)
             return;
