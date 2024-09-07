@@ -1,0 +1,2 @@
+docker run -v $PWD:/app -w /app  maven:3.9.8-eclipse-temurin-17 mvn package -Dmaven.test.skip
+

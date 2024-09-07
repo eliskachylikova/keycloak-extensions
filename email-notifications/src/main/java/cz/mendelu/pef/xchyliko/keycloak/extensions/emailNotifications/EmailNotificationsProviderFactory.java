@@ -11,15 +11,17 @@ import org.keycloak.models.KeycloakSessionFactory;
 public class EmailNotificationsProviderFactory implements EventListenerProviderFactory {
 
     private static final String ID = "login-new-ip-email-notifications";
+    private Config.Scope config;
 
     @Override
     public EventListenerProvider create(KeycloakSession session) {
-        return new EmailNotificationsProvider(session);
+        return new EmailNotificationsProvider(session, config);
     }
 
     @Override
     public void init(Config.Scope config) {
         log.infof("init config={}", config);
+        this.config = config;
     }
 
     @Override

@@ -1,4 +1,0 @@
-# create file location.properties containing the following
-country_url=https://geolite.info/geoip/v2.1/country/
-account_id=your account id
-license_key=your license key

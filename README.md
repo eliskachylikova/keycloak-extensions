@@ -9,6 +9,11 @@ First build the image - in the root folder of this repo run:
 docker build -t keycloak-extensions .
 ```
 
+If you just want to build the plugin, run the following command from the root folder of this repo. You find the plugin jar e.g. in the following folder keycloak-extensions/email-notifications/target.
+```
+docker run -v $PWD:/app -w /app  maven:3.9.8-eclipse-temurin-17 mvn package -Dmaven.test.skip
+```
+
 Then run the container (admin user must be set up):
 ```
 docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin keycloak-extensions start-dev
